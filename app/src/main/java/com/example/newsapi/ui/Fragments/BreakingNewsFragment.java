@@ -53,7 +53,7 @@ public class BreakingNewsFragment extends Fragment {
         observer = news -> {
             if(news!=null){
                 progressBar.setVisibility(View.GONE);
-                BreakingNewsAdapter breakingNewsAdapter = new BreakingNewsAdapter(news);
+                BreakingNewsAdapter breakingNewsAdapter = new BreakingNewsAdapter(news , "BreakingNewsFragment");
                 recyclerView.setAdapter(breakingNewsAdapter);
             }else{
                 progressBar.setVisibility(View.VISIBLE);

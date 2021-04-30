@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new BreakingNewsFragment())
+                .replace(R.id.fragment_container, new BreakingNewsFragment() , "Fragment")
+                .addToBackStack(null)
                 .commit();
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, selectedFragment)
+                .replace(R.id.fragment_container, selectedFragment , "Fragment")
+                .addToBackStack(null)
                 .commit();
         return true;
     };

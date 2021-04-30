@@ -1,9 +1,15 @@
 package com.example.newsapi.Data.RetrofitResponse;
 
 
-import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+@Entity(tableName = "news_database")
 public class News implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    int id;
 
     private String title , description , urlToImage , content;
     public String getTitle() {
@@ -37,4 +43,14 @@ public class News implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

@@ -54,8 +54,39 @@ public class DataSource {
 
     }
 
+    public void  getSearchQuery(GetQuery getQuery , String query , String language){
+
+        Call<ReturnResponse> dataServiceNews = getDataService.getSearchQuery(query, apiKey, language);
+
+        dataServiceNews.enqueue(new Callback<ReturnResponse>() {
+            @Override
+            public void onResponse(Call<ReturnResponse> call, Response<ReturnResponse> response) {
+                if(response.isSuccessful()){
+                    getQuery.getSearchResult(response.body().getArticles());
+                }else{
+
+                    try {
+                        Log.d(TAG, "onResponse: "+response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReturnResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
+
 
     public interface GetNews{
         void getNews(List<News> news);
+    }
+
+    public interface GetQuery{
+        void getSearchResult(List<News> news);
     }
 }

@@ -23,9 +23,10 @@ import java.util.List;
 public class BreakingNewsAdapter extends RecyclerView.Adapter<BreakingNewsAdapter.BreakingNewsViewHolder> {
 private List<News> news;
     private static final String TAG = "BreakingNewsAdapter";
-
-    public BreakingNewsAdapter(List<News> news) {
+    private String cameFrom;
+    public BreakingNewsAdapter(List<News> news , String cameFrom) {
         this.news = news;
+        this.cameFrom = cameFrom;
     }
 
     @NonNull
@@ -49,12 +50,15 @@ private List<News> news;
         holder.constraintLayout.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("Single News", SingleNews);
-
+            bundle.putString("Came From", cameFrom);
             SingleNewsFragment singleNewsFragment = new SingleNewsFragment();
             singleNewsFragment.setArguments(bundle);
             AppCompatActivity appCompatActivity = (AppCompatActivity) v.getContext();
             Log.d(TAG, "onBindViewHolder: "+v.getContext().toString());
-            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, singleNewsFragment)
+            appCompatActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, singleNewsFragment)
+                    .addToBackStack(null)
                     .commit();
         });
     }

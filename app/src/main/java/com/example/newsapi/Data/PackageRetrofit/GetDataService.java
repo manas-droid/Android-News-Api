@@ -14,4 +14,7 @@ public interface GetDataService {
 
     @GET("top-headlines")
     Call<ReturnResponse> getNews(@Query("country") String country , @Query("apiKey") String apiKey);
+
+    @GET("everything")
+    Call<ReturnResponse> getSearchQuery(@Query("q") String query , @Query("apiKey") String apiKey , @Query("language") String language);
 }
